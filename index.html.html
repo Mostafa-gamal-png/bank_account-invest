@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحسابات البنكية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('8dee3b25-d332-4fff-af5c-9ace09dc79cc.jpg');
+	    background-size: cover;
+	    background-position: center;
+	    background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+	max-hight: 500px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* شعار الشركة */
+        .company-logo {
+            background: white;
+            border-radius: 20px;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .company-logo img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .company-logo h1 {
+            color: #1e3c72;
+            font-size: 2.5em;
+            margin-top: 15px;
+        }
+
+        .company-logo p {
+            color: #666;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        /* عنوان القسم */
+        .section-title {
+            color: white;
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* شبكة البنوك */
+        .banks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+text-align: center
+        }
+
+        /* بطاقة البنك */
+        .bank-card {
+            background: white;
+            border-radius: 10px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+text-align: center
+        }
+
+        .bank-card:nth-child(1) { animation-delay: 0.1s; }
+        .bank-card:nth-child(2) { animation-delay: 0.2s; }
+        .bank-card:nth-child(3) { animation-delay: 0.3s; }
+        .bank-card:nth-child(4) { animation-delay: 0.4s; }
+        .bank-card:nth-child(5) { animation-delay: 0.5s; }
+        .bank-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .bank-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+        }
+
+        /* شعار البنك */
+        .bank-logo {
+            text-align: center;
+            
+        }
+
+        .bank-logo img {
+            max-width: 100px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        /* اسم البنك */
+        .bank-name {
+            text-align: center;
+            font-size: 1.6em;
+            color: #2d3748;
+            font-weight: 1000;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        /* أزرار النسخ */
+        .copy-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #2D548F 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 18px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+.copy-btn .value {
+    text-align: center;  /* ← السطر ده جديد */
+}
+.copy-btn .label {
+    text-align: center;  /* ← السطر ده جديد */
+}
+.copy-btn .icon {
+    position: absolute;      /* ← جديد: خلى الأيقونة ثابتة */
+    left: 20px;             /* ← جديد: على الشمال */
+    top: 50%;               /* ← جديد: في النص عمودياً */
+    transform: translateY(-50%);  /* ← جديد: ظبط المنتصف */
+    /* وشلت: margin-left: 10px */
+}
+.copy-btn {
+    flex-direction: column;  /* ← جديد: خلى الزر عمودي */
+    align-items: center;     /* ← جديد: في النص */
+    gap: 8px;                /* ← جديد: مسافة بين العناصر */
+    /* وشلت: justify-content: space-between */
+}
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .copy-btn .value {
+            font-family: 'Courier New', monospace;
+            font-size: 1.05em;
+            letter-spacing: 1px;
+            direction: ltr;
+        }
+
+        .copy-btn .icon {
+            font-size: 1.3em;
+            margin-left: 10px;
+        }
+
+        /* رسالة النسخ */
+        .copy-notification {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: #10b981;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+            font-size: 1.1em;
+            font-weight: 600;
+            transform: translateX(400px);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .copy-notification.show {
+            transform: translateX(0);
+        }
+
+        .copy-notification .check-icon {
+            font-size: 1.5em;
+        }
+
+        /* الأنيميشن */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* التجاوب مع الموبايل */
+        @media (max-width: 768px) {
+            .banks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .company-logo h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.6em;
+            }
+
+            .copy-notification {
+                right: 20px;
+                left: 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- شعار الشركة -->
+        <div class="company-logo">
+            <!-- ضع شعار شركتك هنا -->
+            <img src="fsimage.png" alt="شعار الشركة" style="max-width: 500px;">
+           
+         <h1 >الحسابات البنكية للشركة /Company bank details
+ </h1>
+	 <h1 >  </h1>
+        </div>
+
+        
+
+        <div class="banks-grid">
+            <!-- الراجحي -->
+            <div class="bank-card">
+                <div class="bank-logo">
+                    <img src="39-4-1536x547.png" alt="مصرف الراجحي"style="max-width: 100px;">
+
+                </div>
+                <h3 class="bank-name">  مــصــرف الراجــحـــي/  Rajhi  Bank</h3>
+
+                <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyToClipboard('SA2580000255608010403469', 'رقم الآيبان')">
+                        <div>
+                            <div class="label">رقم الآيبان </div>
+                            <div class="value">SA2580000255608010403469</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                    <button class="copy-btn" onclick="copyToClipboard('255608010403469', 'رقم الحساب')">
+                        <div>
+                            <div class="label">رقم الحساب </div>
+                            <div class="value" >255608010403469</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- الأهلي -->
+            <div class="bank-card">
+                <div class="bank-logo">
+                    <img src="image.jpg" alt="البنك الأهلي">
+                </div>
+                <p class="bank-name">البنك الأهلي السعودي/National Commercial Bank</p>
+                <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyToClipboard('SA951000013272643000100', 'رقم الآيبان')">
+                        <div>
+                            <div class="label">رقم الآيبان </div>
+                            <div class="value">SA951000013272643000100</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                    <button class="copy-btn" onclick="copyToClipboard('13272643000100', 'رقم الحساب')">
+                        <div>
+                            <div class="label">رقم الحساب </div>
+                            <div class="value">13272643000100</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- الرياض -->
+            <div class="bank-card">
+                <div class="bank-logo">
+                    <img src="طريقة-حساب-استثماري-ببنك-الرياض-1024x576.jpg" alt="بنك الرياض">
+                </div>
+                <h3 class="bank-name">Riyadh Bank/بنك الرياض</h3>
+                <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyToClipboard('SA16200000001021424889940', 'رقم الآيبان')">
+                        <div>
+                            <div class="label">رقم الآيبان </div>
+                            <div class="value">SA16200000001021424889940</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                    <button class="copy-btn" onclick="copyToClipboard('1021424889940', 'رقم الحساب')">
+                        <div>
+                            <div class="label">رقم الحساب </div>
+                            <div class="value">1021424889940</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- البنك العربي -->
+            <div class="bank-card">
+                <div class="bank-logo">
+                    <img src="anb-logo-ar.png" alt="العربي الوطني">
+                </div>
+                <h3 class="bank-name">Arab Bank/البنك العربي</h3>
+                <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyToClipboard('SA2430400108095368620015', 'رقم الآيبان')">
+                        <div>
+                            <div class="label">رقم الآيبان </div>
+                            <div class="value">SA2430400108095368620015</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                    <button class="copy-btn" onclick="copyToClipboard('108095368620015', 'رقم الحساب')">
+                        <div>
+                            <div class="label">رقم الحساب</div>
+                            <div class="value">108095368620015</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                </div>
+            </div>
+
+            
+  
+
+            <!-- الإنماء -->
+            <div class="bank-card">
+                <div class="bank-logo">
+                    <img src="1332406-640644031.jpg" alt="مصرف الإنماء">
+                </div>
+                <h3 class="bank-name">Alinma Bank/مصرف الإنماء</h3>
+                <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyToClipboard('SA6905000068202173286000, 'رقم الآيبان')">
+                        <div>
+                            <div class="label">رقم الآيبان</div>
+                            <div class="value">SA6905000068202173286000</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                    <button class="copy-btn" onclick="copyToClipboard('68202173286000', 'رقم الحساب')">
+                        <div>
+                            <div class="label">رقم الحساب</div>
+                            <div class="value">68202173286000</div>
+                        </div>
+                        <span class="icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- إشعار النسخ -->
+    <div class="copy-notification" id="notification">
+        <span class="check-icon">✓</span>
+        <span id="notificationText">تم النسخ بنجاح!</span>
+    </div>
+
+    <script>
+        function copyToClipboard(text, type) {
+            // نسخ النص بدون المسافات
+            const cleanText = text.replace(/\s/g, '');
+            
+            navigator.clipboard.writeText(cleanText).then(function() {
+                showNotification(`تم نسخ ${type} بنجاح ✓`);
+            }).catch(function(err) {
+                console.error('فشل النسخ: ', err);
+                showNotification('حدث خطأ في النسخ ❌');
+            });
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
